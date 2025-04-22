@@ -17,24 +17,32 @@ go get github.com/Gaggun-Chaggar/mapq
 ## Example
 
 ```golang
+...
+
+import (
+	. "https://github.com/smarty/assertions" // example uses "assertions" for all 'Should' comparisons
+)
+
+...
+
 queryBuilder := mapq.FromSlice([]map[string]any{
-		{"level": "error", "nested": map[string]any{"object": "hi"}, "all": true},
-		{"level": "info", "size": "big", "all": true},
-		{"level": "warn", "array": []any{1, 2}, "all": true},
-		{"level": "warn", "size": "big", "all": true},
-		{"level": "error", "all": true, "nested": []any{"object", "hi"}},
-	})
+  {"level": "error", "nested": map[string]any{"object": "hi"}, "all": true},
+  {"level": "info", "size": "big", "all": true},
+  {"level": "warn", "array": []any{1, 2}, "all": true},
+  {"level": "warn", "size": "big", "all": true},
+  {"level": "error", "all": true, "nested": []any{"object", "hi"}},
+})
 
 // find all maps where ("level" = "warn" AND "size" = "big") OR "level" = "error"
 query := queryBuilder.Where(
-			mapq.Or(
-				mapq.And(
-					mapq.Assert("level", ShouldEqual, "warn"),
-					mapq.Assert("size", ShouldContainSubstring, "big"),
-				),
-				mapq.Assert("level", ShouldEqual, "error"),
-			),
-		)
+  mapq.Or(
+    mapq.And(
+      mapq.Assert("level", ShouldEqual, "warn"),
+      mapq.Assert("size", ShouldContainSubstring, "big"),
+    ),
+    mapq.Assert("level", ShouldEqual, "error"),
+  ),
+)
 
 filteredSlice := mapq.Filter(query) // returns a []map[string]any with all matching values
 hasAtLeastOne := mapq.Exists(query) // true if there is at least one match
