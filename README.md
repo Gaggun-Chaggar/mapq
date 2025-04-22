@@ -20,7 +20,7 @@ go get github.com/Gaggun-Chaggar/mapq
 ...
 
 import (
-	. "https://github.com/smarty/assertions" // example uses "assertions" for all 'Should' comparisons
+  . "https://github.com/smarty/assertions" // example uses "assertions" for all 'Should' comparisons
 )
 
 ...
