@@ -10,6 +10,7 @@ import (
 	"strings"
 )
 
+// Create a new query builder from a structure log file
 func FromSlogFile(filePath string) (*Query, error) {
 	errorf := packageErrorf("FromFile")
 	file, err := os.Open(filePath)
@@ -21,14 +22,17 @@ func FromSlogFile(filePath string) (*Query, error) {
 	return FromSlogReader(file)
 }
 
+// Create a new query builder from structured log data in a string variable
 func FromSlogString(logStr string) (*Query, error) {
 	return FromSlogReader(strings.NewReader(logStr))
 }
 
+// Create a new query builder from structured log data in a []byte variable
 func FromSlogBytes(logBytes []byte) (*Query, error) {
 	return FromSlogReader(bytes.NewReader(logBytes))
 }
 
+// Create a new query builder from structured log data in a reader
 func FromSlogReader(logReader io.Reader) (*Query, error) {
 	scanner := bufio.NewScanner(logReader)
 

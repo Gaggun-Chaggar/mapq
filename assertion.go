@@ -5,7 +5,9 @@ import (
 	"strings"
 )
 
-type Operation func(left any, expected ...any) string
+// Compares a `value` against `expected` results
+// returns a non-empty string if comparison fails
+type Operation func(value any, expected ...any) string
 
 type assertion struct {
 	property  string
@@ -13,14 +15,17 @@ type assertion struct {
 	expected  []any
 }
 
+// Shorthand to chain two assertions with "And"
 func (a assertion) And(a2 any) joiner {
 	return joiner{andJoin, []any{a, a2}}
 }
 
+// Shorthand to chain two assertions with "Or"
 func (a assertion) Or(a2 any) joiner {
 	return joiner{orJoin, []any{a, a2}}
 }
 
+// Shorthand to chain two assertions with "XOr"
 func (a assertion) XOr(a2 any) joiner {
 	return joiner{xOrJoin, []any{a, a2}}
 }

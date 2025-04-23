@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// Create a new query builder from a json file
 func FromJSONFile(filePath string) (*Query, error) {
 	errorf := packageErrorf("FromFile")
 	file, err := os.Open(filePath)
@@ -17,10 +18,12 @@ func FromJSONFile(filePath string) (*Query, error) {
 	return FromJSONReader(file)
 }
 
+// Create a new query builder from a json string
 func FromJSONString(jsonStr string) (*Query, error) {
 	return FromJSONBytes([]byte(jsonStr))
 }
 
+// Create a new query builder from a json reader
 func FromJSONReader(jsonReader io.Reader) (*Query, error) {
 	errorf := packageErrorf("FromReader")
 	bytes, err := io.ReadAll(jsonReader)
@@ -32,6 +35,7 @@ func FromJSONReader(jsonReader io.Reader) (*Query, error) {
 	return FromJSONBytes(bytes)
 }
 
+// Create a new query builder from json bytes
 func FromJSONBytes(jsonBytes []byte) (*Query, error) {
 	errorf := packageErrorf("FromBytes")
 	maps := []map[string]any{}

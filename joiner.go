@@ -13,14 +13,17 @@ type joiner struct {
 	stack    []any
 }
 
+// Shorthand to chain two joiners with "And"
 func (j joiner) And(a2 any) joiner {
 	return joiner{andJoin, []any{j, a2}}
 }
 
+// Shorthand to chain two joiners with "Or"
 func (j joiner) Or(a2 any) joiner {
 	return joiner{orJoin, []any{j, a2}}
 }
 
+// Shorthand to chain two joiners with "XOr"
 func (j joiner) XOr(a2 any) joiner {
 	return joiner{xOrJoin, []any{j, a2}}
 }
