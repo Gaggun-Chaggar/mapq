@@ -49,3 +49,40 @@ hasAtLeastOne := mapq.Exists(query) // true if there is at least one match
 allMapsMatch := mapq.All(query) // true if all maps in slice match
 hasTwoResultsOnly := mapq.Has(2, query) // true if the number of maps in slice that match the query is 2
 ```
+
+## Ingesting Data
+
+`mapq` supports multiple different ways of ingesting data for querying.
+
+### Structured Logs
+
+Structure logs are json objects separated by new lines, e.g.
+
+```
+{ "level": "info", "message": "hello" }
+{ "level": "error", "message": "batman lost his utility belt" }
+```
+
+These logs are supported by the library and can be ingested from `[]byte`, `string`, `io.Reader` or a file path.
+
+```
+func FromSlogFile(filePath string) (*Query, error)
+func FromSlogString(logStr string) (*Query, error)
+func FromSlogBytes(logBytes []byte) (*Query, error)
+func FromSlogReader(logReader io.Reader) (*Query, error)
+```
+
+### JSON Arrays
+
+Arrays of json objects are also supported with all of the same methods as structured logs.
+
+```
+func FromJSONFile(filePath string) (*Query, error)
+func FromJSONString(jsonStr string) (*Query, error)
+func FromJSONReader(jsonReader io.Reader) (*Query, error)
+func FromJSONBytes(jsonBytes []byte) (*Query, error)
+```
+
+### Variables
+
+Currently only `[]map[string]any` is supported using the `FromSlice(maps []map[string]any) *Query` method.
