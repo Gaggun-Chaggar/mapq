@@ -1,5 +1,5 @@
-module mapq
+module github.com/Gaggun-Chaggar/mapq
 
-go 1.24.1
+go 1.23.0
 
-require github.com/smarty/assertions v1.16.0 // indirect
+require github.com/smarty/assertions v1.16.0
