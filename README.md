@@ -72,7 +72,7 @@ func FromSlogBytes(logBytes []byte) (*Query, error)
 func FromSlogReader(logReader io.Reader) (*Query, error)
 ```
 
-### JSON Arrays
+### JSON Arrays
 
 Arrays of json objects are also supported with all of the same methods as structured logs.
 
