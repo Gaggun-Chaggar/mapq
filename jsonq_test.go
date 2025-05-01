@@ -1,11 +1,12 @@
 package mapq_test
 
 import (
-	"mapq"
 	"strings"
 	"testing"
 
-	. "mapq/testutils"
+	"github.com/Gaggun-Chaggar/mapq"
+
+	. "github.com/Gaggun-Chaggar/mapq/testutils"
 
 	. "github.com/smarty/assertions"
 )

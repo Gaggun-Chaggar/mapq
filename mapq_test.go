@@ -1,9 +1,10 @@
 package mapq_test
 
 import (
-	"mapq"
-	. "mapq/testutils"
 	"testing"
+
+	"github.com/Gaggun-Chaggar/mapq"
+	. "github.com/Gaggun-Chaggar/mapq/testutils"
 
 	. "github.com/smarty/assertions"
 )
