@@ -13,4 +13,4 @@ func createErrorf(packageName string) methodErrorfFunc {
 	}
 }
 
-var packageErrorf = createErrorf("jsonq")
+var packageErrorf = createErrorf("mapq")

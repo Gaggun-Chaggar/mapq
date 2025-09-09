@@ -12,7 +12,7 @@ import (
 
 // Create a new query builder from a structure log file
 func FromSlogFile(filePath string) (*Query, error) {
-	errorf := packageErrorf("FromFile")
+	errorf := packageErrorf("FromSlogFile")
 	file, err := os.Open(filePath)
 
 	if err != nil {
