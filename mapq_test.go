@@ -58,12 +58,28 @@ func testQueryBuilder(t *testing.T, builder *mapq.Query) {
 		ExpectThat(t, mapq.Has(3, query), ShouldBeTrue)
 	})
 
+	t.Run("supports OR shorthand clauses", func(t *testing.T) {
+		query := builder.Where(
+			mapq.Assert("level", ShouldEqual, "warn").
+				Or(mapq.Assert("butt", ShouldContainSubstring, "big")),
+		)
+		ExpectThat(t, mapq.Has(3, query), ShouldBeTrue)
+	})
+
 	t.Run("supports XOR clauses", func(t *testing.T) {
 		query := builder.Where(
 			mapq.XOr(
 				mapq.Assert("level", ShouldEqual, "warn"),
 				mapq.Assert("butt", ShouldContainSubstring, "big"),
 			),
+		)
+		ExpectThat(t, mapq.Has(2, query), ShouldBeTrue)
+	})
+
+	t.Run("supports XOR shorthand clauses", func(t *testing.T) {
+		query := builder.Where(
+			mapq.Assert("level", ShouldEqual, "warn").
+				XOr(mapq.Assert("butt", ShouldContainSubstring, "big")),
 		)
 		ExpectThat(t, mapq.Has(2, query), ShouldBeTrue)
 	})
@@ -77,6 +93,19 @@ func testQueryBuilder(t *testing.T, builder *mapq.Query) {
 				),
 				mapq.Assert("level", ShouldEqual, "error"),
 			),
+		)
+		ExpectThat(t, mapq.Has(3, query), ShouldBeTrue)
+	})
+
+	t.Run("supports nested clauses using shorthands", func(t *testing.T) {
+		query := builder.Where(
+			mapq.Assert("level", ShouldEqual, "warn").
+				And(
+					mapq.Assert("butt", ShouldContainSubstring, "big"),
+				).
+				Or(
+					mapq.Assert("level", ShouldEqual, "error"),
+				),
 		)
 		ExpectThat(t, mapq.Has(3, query), ShouldBeTrue)
 	})
